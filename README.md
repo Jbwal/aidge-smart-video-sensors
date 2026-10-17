@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains my work for the Aidge Smart Video Sensors
+This repository contains our work for the Aidge Smart Video Sensors
 challenge.
 
 The project focuses on embedded AI and computer vision for intelligent
