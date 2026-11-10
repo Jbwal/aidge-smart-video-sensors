@@ -48,7 +48,7 @@ def train():
     criterion = nn.BCEWithLogitsLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-    epochs = 10
+    epochs = 25
     print(f'debut entrainement en {epochs} epoques')
 
     for epoch in range(epochs):

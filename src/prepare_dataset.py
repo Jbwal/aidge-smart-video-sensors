@@ -4,6 +4,7 @@ import urllib.request
 import cv2
 import json
 from tqdm import tqdm
+import random
 
 DATA_DIR = "./data"
 RAW_DIR = os.path.join(DATA_DIR, "raw")
@@ -59,16 +60,29 @@ def process_dataset():
             if img_id not in img_annotations:
                 img_annotations[img_id] = []
             img_annotations[img_id].append(ann['bbox'])  #[x,y,largeur,hauteur]
+    
+    other_img_ids = set(img['id'] for img in coco['images'])
+    non_person_img_ids = list(other_img_ids - person_img_ids)
 
-    images_dict = {img['id']: img for img in coco['images'] if img['id'] in person_img_ids}
-    img_id_list = list(images_dict.keys())
+    random.seed(42)
+
+    min_count = min(len(person_img_ids), len(non_person_img_ids))
+    sampled_person_ids = set(random.sample(list(person_img_ids), min_count))
+    sampled_non_person_ids = set(random.sample(list(non_person_img_ids), min_count))
+
+    final_img_ids = list(sampled_person_ids)+list(sampled_non_person_ids)
+    random.shuffle(final_img_ids)
+
+    images_dict = {img['id']: img for img in coco['images']}
 
     #on garde 80% des images pour l'entrainement et 20% pour la validation
-    split_idx = int(len(img_id_list) * 0.8)
-    train_ids = img_id_list[:split_idx]
-    val_ids = img_id_list[split_idx:]
+    split_idx = int(len(final_img_ids) * 0.8)
+    train_ids = set(final_img_ids[:split_idx])
+    val_ids = set(final_img_ids[split_idx:])
 
-    for img_id in tqdm(img_id_list):
+    print(f"{len(sampled_person_ids)} images avec personnes et {len(sampled_non_person_ids)} images sans personnes")
+
+    for img_id in final_img_ids:
         img_info = images_dict[img_id]
         file_name = img_info['file_name']
         src_path = os.path.join(img_dir, file_name)
@@ -86,22 +100,22 @@ def process_dataset():
         #determiner si train ou val
         split = "train" if img_id in train_ids else "val"
         out_img_path = os.path.join(PROCESSED_DIR, f"images/{split}/{os.path.splitext(file_name)[0]}.png")
-        out_label_path = os.path.join(PROCESSED_DIR, f"labels/{split}/{os.path.splitext(file_name)[0]}.txt")
-
         #sauvegarder l'image
         cv2.imwrite(out_img_path, img_resized)
 
-        #normalisation des bounding box pour le format YOLO
-        with open(out_label_path, 'w') as lf:
-            for bbox in img_annotations[img_id]:
-                x, y, w, h = bbox
-                #conversion en coordonnees normalisées (0.0 à 1.0)
-                x_center = (x + w / 2.0) / orig_w
-                y_center = (y + h / 2.0) / orig_h
-                norm_w = w / orig_w
-                norm_h = h / orig_h
+        if img_id in sampled_person_ids:
+            out_label_path = os.path.join(PROCESSED_DIR,f"labels/{split}/{os.path.splitext(file_name)[0]}.txt")
+            #normalisation des bounding box pour le format YOLO
+            with open(out_label_path, 'w') as lf:
+                for bbox in img_annotations[img_id]:
+                    x, y, w, h = bbox
+                    #conversion en coordonnees normalisées (0.0 à 1.0)
+                    x_center = (x + w / 2.0) / orig_w
+                    y_center = (y + h / 2.0) / orig_h
+                    norm_w = w / orig_w
+                    norm_h = h / orig_h
 
-                lf.write(f"0 {x_center:.6f} {y_center:.6f} {norm_w:.6f} {norm_h:.6f}\n")
+                    lf.write(f"0 {x_center:.6f} {y_center:.6f} {norm_w:.6f} {norm_h:.6f}\n")
     print(f"images disponibles dans {PROCESSED_DIR}")
 
 if __name__ == "__main__":
