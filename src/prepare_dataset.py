@@ -29,13 +29,13 @@ def download_coco_val2017():
     img_zip = os.path.join(RAW_DIR, "val2017.zip")
     ann_zip = os.path.join(RAW_DIR, "annotations.zip")
 
-    if not os.path.exists(img_zip):
+    if not os.path.exists(os.path.join(RAW_DIR, "val2017")):
         #telechargement images coco val2017
         urllib.request.urlretrieve(img_url, img_zip)
         with zipfile.ZipFile(img_zip, 'r') as zip_ref:
             zip_ref.extractall(RAW_DIR)
 
-    if not os.path.exists(ann_zip):
+    if not os.path.exists(os.path.join(RAW_DIR, "annotations")):
         #telechargement des annotations coco
         urllib.request.urlretrieve(ann_url, ann_zip)
         with zipfile.ZipFile(ann_zip, 'r') as zip_ref:
