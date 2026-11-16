@@ -1,47 +1,76 @@
 import torch
-import torch.nn as nn
+from torch import nn
 
-class PersonDetectorCNN(nn.Module):
 
-    #filtres utilisés par le réseau de neurone
-    def __init__(self, num_classes=1):
-        super(PersonDetectorCNN, self).__init__()
-        
-        #bloc 1 : 160x120 -> 80x60
-        self.conv1 = nn.Conv2d(1, 16, kernel_size=3, stride=2, padding=1)
-        self.bn1 = nn.BatchNorm2d(16)
-        self.relu1 = nn.ReLU()
+class ConvBNReLU(nn.Sequential):
+    def __init__(self, in_channels, out_channels, kernel_size, stride=1):
+        layers = [
+            nn.Conv2d(in_channels, out_channels, kernel_size, stride, kernel_size // 2, bias=True),
+            nn.BatchNorm2d(out_channels),
+            nn.ReLU(inplace=True),
+        ]
+        super().__init__(*layers)
 
-        #bloc 2 : 80x60 -> 40x30 (depthwise separable vonv pour save la memoire)
-        self.dw_conv2 = nn.Conv2d(16, 16, kernel_size=3, stride=2, padding=1, groups=16)
-        self.pw_conv2 = nn.Conv2d(16, 32, kernel_size=1)
-        self.bn2 = nn.BatchNorm2d(32)
-        self.relu2 = nn.ReLU()
 
-        #bloc 3 : 40x30 -> 20x15
-        self.dw_conv3 = nn.Conv2d(32, 32, kernel_size=3, stride=2, padding=1, groups=32)
-        self.pw_conv3 = nn.Conv2d(32, 64, kernel_size=1)
-        self.bn3 = nn.BatchNorm2d(64)
-        self.relu3 = nn.ReLU()
+class DWConvBNReLU(ConvBNReLU):
+    def __init__(self, channels, kernel_size=5, stride=1):
+        nn.Sequential.__init__(
+            self,
+            nn.Conv2d(channels, channels, kernel_size, stride, kernel_size // 2, groups=channels, bias=True),
+            nn.BatchNorm2d(channels),
+            nn.ReLU(inplace=True),
+        )
 
-        #bloc 4 : poooling global 20x15 -> 1x1
-        self.global_pool = nn.AdaptiveAvgPool2d((1, 1))
-        
-        #classification : on choisis si on detecte une personne ou pas
-        self.fc = nn.Linear(64, num_classes)
+
+class PersonDetector(nn.Module):
+    stride = 4
+
+    def __init__(self):
+        super().__init__()
+        self.net = nn.Sequential(
+            ConvBNReLU(1, 16, 3, 2),
+            ConvBNReLU(16, 32, 1),
+            DWConvBNReLU(32, 5, 2),
+            ConvBNReLU(32, 64, 1),
+            DWConvBNReLU(64),
+            ConvBNReLU(64, 80, 1),
+            DWConvBNReLU(80),
+            ConvBNReLU(80, 96, 1),
+            DWConvBNReLU(96),
+            ConvBNReLU(96, 96, 1),
+            DWConvBNReLU(96),
+            ConvBNReLU(96, 112, 1),
+            DWConvBNReLU(112),
+            ConvBNReLU(112, 112, 1),
+            DWConvBNReLU(112),
+            ConvBNReLU(112, 128, 1),
+            DWConvBNReLU(128),
+            ConvBNReLU(128, 128, 1),
+            DWConvBNReLU(128),
+            ConvBNReLU(128, 128, 1),
+            ConvBNReLU(128, 64, 1),
+            DWConvBNReLU(64, 3),
+            nn.Conv2d(64, 5, 1),
+        )
+        self._initialize_weights()
+
+    def _initialize_weights(self):
+        for module in self.modules():
+            if isinstance(module, nn.Conv2d):
+                nn.init.kaiming_normal_(module.weight, mode="fan_out", nonlinearity="relu")
+                if module.bias is not None:
+                    nn.init.zeros_(module.bias)
+            elif isinstance(module, nn.BatchNorm2d):
+                nn.init.ones_(module.weight)
+                nn.init.zeros_(module.bias)
+        with torch.no_grad():
+            self.net[-1].bias[4] = torch.log(torch.tensor(0.01 / 0.99)).item()
 
     def forward(self, x):
-        x = self.relu1(self.bn1(self.conv1(x)))
-        x = self.relu2(self.bn2(self.pw_conv2(self.dw_conv2(x))))
-        x = self.relu3(self.bn3(self.pw_conv3(self.dw_conv3(x))))
-        x = self.global_pool(x)
-        x = torch.flatten(x, 1)
-        x = self.fc(x)
-        return x
+        return self.net(x)
+
 
 if __name__ == "__main__":
-    model = PersonDetectorCNN()
-    dummy_input = torch.randn(1, 1, 120, 160)
-    output = model(dummy_input)
-    print("modele ok")
-    print(f"{output.shape}")
+    model = PersonDetector()
+    out = model(torch.randn(1, 1, 120, 160))
+    print("Modèle OK, sortie :", out.shape)  # Doit afficher torch.Size([1, 5, 30, 40])
