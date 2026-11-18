@@ -1,0 +1,236 @@
+%%{init: {'flowchart': { 'curve': 'monotoneY'}, 'fontFamily': 'Verdana' } }%%
+flowchart TB
+
+Producer_9("conv5_b_out0&nbsp;<sup><span title="name = conv5_b_out0
+quantization:
+  ptq:
+    precision = int32
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#9)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Producer_2("conv2_w_out0&nbsp;<sup><span title="name = conv2_w_out0
+quantization:
+  ptq:
+    precision = int8
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#2)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Quantizer_11("_17_QConv_0_biases&nbsp;<sup><span title="name = _17_QConv_0_biases
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#11)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Quantizer_0("_1_Quantizer_1&nbsp;<sup><span title="name = _1_Quantizer_1
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#0)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Quantizer_1("_2_Quantizer_2&nbsp;<sup><span title="name = _2_Quantizer_2
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#1)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Quantizer_2("_3_Quantizer_3&nbsp;<sup><span title="name = _3_Quantizer_3
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#2)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Producer_3("conv2_b_out0&nbsp;<sup><span title="name = conv2_b_out0
+quantization:
+  ptq:
+    precision = int32
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#3)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Producer_0("conv1_w_out0&nbsp;<sup><span title="name = conv1_w_out0
+quantization:
+  ptq:
+    precision = int8
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#0)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls_rootCls
+Producer_4("conv3_w_out0&nbsp;<sup><span title="name = conv3_w_out0
+quantization:
+  ptq:
+    precision = int8
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#4)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Producer_10("det_head_w_out0&nbsp;<sup><span title="name = det_head_w_out0
+quantization:
+  ptq:
+    precision = int8
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#10)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Producer_1("conv1_b_out0&nbsp;<sup><span title="name = conv1_b_out0
+quantization:
+  ptq:
+    precision = int32
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#1)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Producer_11("det_head_b_out0&nbsp;<sup><span title="name = det_head_b_out0
+quantization:
+  ptq:
+    precision = int32
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#11)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Producer_5("conv3_b_out0&nbsp;<sup><span title="name = conv3_b_out0
+quantization:
+  ptq:
+    precision = int32
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#5)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Quantizer_10("_17_QConv_0_weights&nbsp;<sup><span title="name = _17_QConv_0_weights
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#10)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Producer_7("conv4_b_out0&nbsp;<sup><span title="name = conv4_b_out0
+quantization:
+  ptq:
+    precision = int32
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#7)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Producer_6("conv4_w_out0&nbsp;<sup><span title="name = conv4_w_out0
+quantization:
+  ptq:
+    precision = int8
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#6)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Producer_8("conv5_w_out0&nbsp;<sup><span title="name = conv5_w_out0
+quantization:
+  ptq:
+    precision = int8
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Producer#8)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::producerCls
+Quantizer_3("_5_Quantizer_5&nbsp;<sup><span title="name = _5_Quantizer_5
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#3)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Quantizer_4("_6_Quantizer_6&nbsp;<sup><span title="name = _6_Quantizer_6
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#4)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Quantizer_5("_7_Quantizer_7&nbsp;<sup><span title="name = _7_Quantizer_7
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#5)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Quantizer_6("_8_Quantizer_8&nbsp;<sup><span title="name = _8_Quantizer_8
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#6)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Quantizer_7("_9_Quantizer_9&nbsp;<sup><span title="name = _9_Quantizer_9
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#7)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Quantizer_8("_10_Quantizer_10&nbsp;<sup><span title="name = _10_Quantizer_10
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#8)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Quantizer_9("_11_Quantizer_11&nbsp;<sup><span title="name = _11_Quantizer_11
+quantization:
+  ptq:
+    isProducerQuantizer = 0
+    
+  
+" style="cursor: pointer; font-weight: bold; color: blue">[2]</span></sup><br/><sub><em>(Quantizer#9)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Dequantizer_0("_18_Dequantizer_0<br/><sub><em>(Dequantizer#0)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+QConv_0("_17_QConv_0<br/><sub><em>(QConv#0)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+PadConvAct_0("_12_PadConvAct_0<br/><sub><em>(PadConvAct#0)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+PadConvAct_1("_13_PadConvAct_1<br/><sub><em>(PadConvAct#1)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+PadConvAct_3("_15_PadConvAct_3<br/><sub><em>(PadConvAct#3)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+PadConvAct_2("_14_PadConvAct_2<br/><sub><em>(PadConvAct#2)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+PadConvAct_4("_16_PadConvAct_4<br/><sub><em>(PadConvAct#4)</em></sub>" backend: <span style='color:white; background-color: purple'>export_colibry</span>):::metaCls
+Producer_9-->|"0 [48] float32 cpu<br/>&darr;<br/>0"|Quantizer_9
+Producer_2-->|"0 [32, 16, 3, 3] float32 NCHW cpu<br/>&darr;<br/>0"|Quantizer_2
+Quantizer_11-->|"0 [5] int32 cpu<br/>&darr;<br/>2"|QConv_0
+Quantizer_0-->|"0 [16, 1, 3, 3] int8 NCHW cpu<br/>&darr;<br/>4"|PadConvAct_0
+Quantizer_1-->|"0 [16] int32 cpu<br/>&darr;<br/>5"|PadConvAct_0
+Quantizer_2-->|"0 [32, 16, 3, 3] int8 NCHW cpu<br/>&darr;<br/>4"|PadConvAct_1
+Producer_3-->|"0 [32] float32 cpu<br/>&darr;<br/>0"|Quantizer_3
+Producer_0-->|"0 [16, 1, 3, 3] float32 NCHW cpu<br/>&darr;<br/>0"|Quantizer_0
+Producer_4-->|"0 [48, 32, 3, 3] float32 NCHW cpu<br/>&darr;<br/>0"|Quantizer_4
+Producer_10-->|"0 [5, 48, 1, 1] float32 NCHW cpu<br/>&darr;<br/>0"|Quantizer_10
+Producer_1-->|"0 [16] float32 cpu<br/>&darr;<br/>0"|Quantizer_1
+Producer_11-->|"0 [5] float32 cpu<br/>&darr;<br/>0"|Quantizer_11
+Producer_5-->|"0 [48] float32 cpu<br/>&darr;<br/>0"|Quantizer_5
+Quantizer_10-->|"0 [5, 48, 1, 1] int8 NCHW cpu<br/>&darr;<br/>1"|QConv_0
+Producer_7-->|"0 [64] float32 cpu<br/>&darr;<br/>0"|Quantizer_7
+Producer_6-->|"0 [64, 48, 3, 3] float32 NCHW cpu<br/>&darr;<br/>0"|Quantizer_6
+Producer_8-->|"0 [48, 64, 3, 3] float32 NCHW cpu<br/>&darr;<br/>0"|Quantizer_8
+Quantizer_3-->|"0 [32] int32 cpu<br/>&darr;<br/>5"|PadConvAct_1
+Quantizer_4-->|"0 [48, 32, 3, 3] int8 NCHW cpu<br/>&darr;<br/>4"|PadConvAct_2
+Quantizer_5-->|"0 [48] int32 cpu<br/>&darr;<br/>5"|PadConvAct_2
+Quantizer_6-->|"0 [64, 48, 3, 3] int8 NCHW cpu<br/>&darr;<br/>4"|PadConvAct_3
+Quantizer_7-->|"0 [64] int32 cpu<br/>&darr;<br/>5"|PadConvAct_3
+Quantizer_8-->|"0 [48, 64, 3, 3] int8 NCHW cpu<br/>&darr;<br/>4"|PadConvAct_4
+Quantizer_9-->|"0 [48] int32 cpu<br/>&darr;<br/>5"|PadConvAct_4
+QConv_0-->|"0 [16, 5, 30, 40] int8 NCHW cpu<br/>&darr;<br/>0"|Dequantizer_0
+PadConvAct_0-->|"0 [16, 16, 60, 80] int8 NCHW cpu<br/>&darr;<br/>0"|PadConvAct_1
+PadConvAct_1-->|"0 [16, 32, 30, 40] int8 NCHW cpu<br/>&darr;<br/>0"|PadConvAct_2
+PadConvAct_3-->|"0 [16, 64, 30, 40] int8 NCHW cpu<br/>&darr;<br/>0"|PadConvAct_4
+PadConvAct_2-->|"0 [16, 48, 30, 40] int8 NCHW cpu<br/>&darr;<br/>0"|PadConvAct_3
+PadConvAct_4-->|"0 [16, 48, 30, 40] int8 NCHW cpu<br/>&darr;<br/>0"|QConv_0
+input0((in#0)):::inputCls--->|" [16, 1, 120, 160] int8<br/>&darr;<br/>0"|PadConvAct_0
+input1((in#1)):::inputCls-.->|"&darr;<br/>1"|PadConvAct_0
+input2((in#2)):::inputCls-.->|"&darr;<br/>2"|PadConvAct_0
+input3((in#3)):::inputCls-.->|"&darr;<br/>3"|PadConvAct_0
+input4((in#4)):::inputCls-.->|"&darr;<br/>1"|PadConvAct_1
+input5((in#5)):::inputCls-.->|"&darr;<br/>2"|PadConvAct_1
+input6((in#6)):::inputCls-.->|"&darr;<br/>3"|PadConvAct_1
+input7((in#7)):::inputCls-.->|"&darr;<br/>1"|PadConvAct_2
+input8((in#8)):::inputCls-.->|"&darr;<br/>2"|PadConvAct_2
+input9((in#9)):::inputCls-.->|"&darr;<br/>3"|PadConvAct_2
+input10((in#10)):::inputCls-.->|"&darr;<br/>1"|PadConvAct_3
+input11((in#11)):::inputCls-.->|"&darr;<br/>2"|PadConvAct_3
+input12((in#12)):::inputCls-.->|"&darr;<br/>3"|PadConvAct_3
+input13((in#13)):::inputCls-.->|"&darr;<br/>1"|PadConvAct_4
+input14((in#14)):::inputCls-.->|"&darr;<br/>2"|PadConvAct_4
+input15((in#15)):::inputCls-.->|"&darr;<br/>3"|PadConvAct_4
+Dequantizer_0--->|"0 [16, 5, 30, 40] float32 NCHW<br/>&darr;"|output0((out#0)):::outputCls
+classDef inputCls fill:#afa
+classDef outputCls fill:#ffa
+classDef externalCls fill:#ccc
+classDef producerCls fill:#ccf
+classDef genericCls fill:#f9f9ff,stroke-width:1px,stroke-dasharray: 5 5
+classDef metaCls stroke-width:5px
+classDef rootCls stroke:#f00
+classDef producerCls_rootCls stroke:#f00,fill:#ccf
+classDef genericCls_rootCls stroke:#f00,fill:#f9f9ff,stroke-width:1px,stroke-dasharray: 5 5
+classDef metaCls_rootCls stroke:#f00,stroke-width:5px
+
